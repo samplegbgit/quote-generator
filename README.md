@@ -7,3 +7,6 @@
 - Connected to Type.fit API.
 - Fetches and displays random quotes.
 
+## Day 3
+- Added Copy Quote button.
+- Auto-loads quote on page load.

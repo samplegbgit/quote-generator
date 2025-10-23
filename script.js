@@ -1,13 +1,17 @@
-const quoteEl = document.getElementById("quote");
-const authorEl = document.getElementById("author");
-const btn = document.getElementById("newQuote");
+const q=document.getElementById("quote");
+const a=document.getElementById("author");
+const b=document.getElementById("newQuote");
+const copyBtn=document.createElement("button");
+copyBtn.textContent="Copy Quote";
+document.querySelector(".container").appendChild(copyBtn);
 
-btn.onclick = () => {
-  fetch("https://type.fit/api/quotes")
-    .then(res => res.json())
-    .then(data => {
-      const random = data[Math.floor(Math.random()*data.length)];
-      quoteEl.textContent = `"${random.text}"`;
-      authorEl.textContent = random.author ? `- ${random.author}` : "- Unknown";
-    });
-};
+function getQuote(){
+  fetch("https://type.fit/api/quotes").then(r=>r.json()).then(d=>{
+    const rand=d[Math.floor(Math.random()*d.length)];
+    q.textContent=`"${rand.text}"`;
+    a.textContent=rand.author?`- ${rand.author}`:"- Unknown";
+  });
+}
+b.onclick=getQuote;
+copyBtn.onclick=()=>navigator.clipboard.writeText(`${q.textContent} ${a.textContent}`);
+getQuote();
